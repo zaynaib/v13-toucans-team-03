@@ -4,8 +4,10 @@ let greet_input = document.getElementById("greeting__input");
 
 //methods
 
-//if local storage is not empty
-//display hello message
+/*
+if local storage is not empty
+display hello 
+*/
 
 if(localStorage.getItem('userName')){
     greet.innerHTML = "Hello " + localStorage.getItem('userName');
