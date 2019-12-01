@@ -31,7 +31,7 @@ async function showPosition(position){
 
   let weatherDataInfo = weatherData(myjson);
   console.log(weatherDataInfo);
-  console.log(weatherDataInfo[0].weatherIconUrl)
+  console.log(weatherDataInfo[0].weatherIconUrl);
 
 }
 
