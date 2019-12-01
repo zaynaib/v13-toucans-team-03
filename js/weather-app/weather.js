@@ -29,10 +29,9 @@ async function showPosition(position){
   const myjson = await response.json();
   //console.log(myjson)
 
-  //console.log(weatherData(myjson));
-  let wStuff = weatherData(myjson);
-  console.log(wStuff)
-
+  let weatherDataInfo = weatherData(myjson);
+  console.log(weatherDataInfo);
+  console.log(weatherDataInfo[0].weatherIconUrl)
 
 }
 
@@ -47,7 +46,8 @@ function weatherData(jsonData){
   for(let index in jsonData.list){
     //weather object respones from the api
     let weatherObj = jsonData.list[index];
-
+    
+    //response data from weather api
     let resData ={
       city :jsonData.city.name,
       weatherDescription : weatherObj.weather[0].main,
