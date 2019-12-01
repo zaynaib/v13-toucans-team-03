@@ -11,7 +11,6 @@ function getLocation(){
   }
 }
 
-
 async function showPosition(position){
 
   //get the coordinates from browser
@@ -24,54 +23,46 @@ async function showPosition(position){
 
   //response
   const response = await fetch(weather_url);
-  console.log(response)
+  //console.log(response)
 
   //body of the response
   const myjson = await response.json();
-  console.log(myjson)
+  //console.log(myjson)
 
-  weatherData(myjson);
+  //console.log(weatherData(myjson));
+  let wStuff = weatherData(myjson);
+  console.log(wStuff)
+
 
 }
 
 //function will extract key information from openweather API call
 
 function weatherData(jsonData){
-  //name of city
-  let cityName = jsonData.city.name;
-  console.log(cityName);
+
+  //weatherData for 5 days
+  let weatherData5 = [];
 
   //loop through 7 days of weather data 
   for(let index in jsonData.list){
-
-    //one weather data object
-    console.log(jsonData.list[index])
+    //weather object respones from the api
     let weatherObj = jsonData.list[index];
 
-    //epoch date of weather 
-    console.log(weatherObj.dt);
+    let resData ={
+      city :jsonData.city.name,
+      weatherDescription : weatherObj.weather[0].main,
+      weatherDate : new Date(parseInt(weatherObj.dt)*1000),
+      weatherTemp : weatherObj.temp.max,
+      weatherIcon : weatherObj.weather[0].icon,
+      weatherIconUrl : `http://openweathermap.org/img/wn/${weatherObj.weather[0].icon}@2x.png`
 
-    //human readable date for weather object
-    let weatherDate =new Date(parseInt(weatherObj.dt)*1000);
-    console.log(weatherDate)
-
-    //maxium tempature for that day
-    let weatherTemp = weatherObj.temp.max;
-    console.log(weatherObj.temp.max);
-
-    //weather description from that day
-    let weatherDescription = weatherObj.weather[0].main;
-    console.log(weatherObj.weather[0].main);
-
-    //weather icon
-    let weatherIcon = weatherObj.weather[0].icon;
-    console.log(weatherIcon,"weatherIcon");
-
-    let weatherIconUrl = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
-    console.log(weatherIconUrl,"weather icon link")
-
+    };
+    weatherData5.push(resData);
   
-  }
+  } //end of for loop
+
+  return weatherData5;
+
 }
 
 
